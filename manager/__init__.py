@@ -6,12 +6,13 @@ from manager.voucher.voucher import vouchers_bp
 from manager.register.supplier import supplier_bp
 from manager.register.supply import supply_bp
 from manager.register.mainpage import main_bp
+import os
 
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'dev'
-    app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///inventory.db'
+    app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+    app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DB_URI', 'sqlite:///inventory.db')
     app.config["DATABASE_TRACK_MODIFICATIONS"] = False
 
     db.init_app(app)
@@ -34,7 +35,7 @@ def create_app():
 
 
 if __name__ == '__main__':
-    create_app().run(debug=True)
+    create_app().run(debug=False)
 
 
 
