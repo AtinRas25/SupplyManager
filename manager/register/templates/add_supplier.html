@@ -1,0 +1,16 @@
+{% extends "dashboard.html" %}
+
+
+{% block content %}
+<div>
+    <form action="{{url_for('supplier.add_supplier')}}" method="POST">
+        {{ form.csrf_token }}
+        {{ form.supplier_name.label }}
+        {{ form.supplier_name }}
+        {{ form.supplier_mobile.label }}
+        {{ form.supplier_mobile }}
+        {{ form.submit }}
+    </form>
+</div>
+
+{% endblock %}

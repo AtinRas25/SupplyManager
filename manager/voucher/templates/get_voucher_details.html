@@ -1,0 +1,27 @@
+
+        <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Item Name</th>
+            <th>Item Supplier</th>
+            <th>Quantity</th>
+            <th>Quantity remaining</th>
+            <th>Quantity recieved</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key in voucher.keys() %}
+        {% if key != 'Total_qty': %}
+        <tr>
+            <td>{{key}}</td>
+            <td>{{voucher[key]['item_name']}}</td>
+            <td>{{voucher[key]['item_supplier']}}</td>
+            <td>{{voucher[key]['item_qty']}}</td>
+            <td>{{voucher[key]['item_remaining']}}</td>
+            <td><input type="number" id="qty_received" name="qty" value="0" max="{{voucher[key]['item_remaining']}}"></td>
+
+        </tr>
+        {% endif %}
+        {% endfor %}
+        </tbody>
+

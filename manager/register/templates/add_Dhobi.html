@@ -1,0 +1,10 @@
+{% extends "dashboard.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block styles %}
+{{ bootstrap.load_css() }}
+
+{% endblock %}
+{% block content %}
+{{ render_form(form) }}
+
+{% endblock %}

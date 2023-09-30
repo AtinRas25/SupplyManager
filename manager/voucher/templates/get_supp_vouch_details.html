@@ -1,0 +1,18 @@
+<thead>
+        <tr>
+            <th>S.No</th>
+            <th>Item Name</th>
+            <th>Quantity</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for key in voucher.keys() %}
+        <tr>
+            <td>{{key}}</td>
+            <td>{{voucher[key]['item']}}</td>
+            <td>{{voucher[key]['item_qty']}}</td>
+<!--            <td><input type="number" id="qty_received" name="qty" value="0" max="{{voucher[key]['item_remaining']}}"></td>-->
+
+        </tr>
+        {% endfor %}
+        </tbody>

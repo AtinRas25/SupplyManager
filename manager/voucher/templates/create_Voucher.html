@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% from "bootstrap5/form.html" import render_form %}
+{% block styles %}
+{{ bootstrap.load_css() }}
+{% endblock %}
+{% block content %}
+
+{{ render_form(form) }}
+<!--<div>-->
+<!--    <form method="POST">-->
+<!--        {{ form.csrf_token }}-->
+<!--        {{ form.dhobi.label }}-->
+<!--        {{ form.dhobi() }}-->
+<!--        {{ form.product() }}-->
+<!--        <button id="add-entry-button">Add more</button>-->
+<!--        {{ form.submit }}-->
+<!--    </form>-->
+<!--</div>-->
+
+{% endblock %}
+
+{% block script %}
+
+<!--<scrip>-->
+<!--    window.onload = function() {-->
+<!--        let addFieldBtn = document.getElementById('add-entry-button');-->
+<!--        addFieldBtn.addEventListener('click', function(e){-->
+<!--            e.preventDefault();-->
+<!--            let allFieldWrapper = document.getElementById('product')-->
+<!--            let allFields = allFieldWrapper.getElementsByTag('select')-->
+<!--            let fieldInputIds = []-->
+<!--            for(let i = 0; i < allFields.length; i++){-->
+<!--                fieldInputIds.push(parseInt(allFields[i].name.split('-')[1]));-->
+<!--            }-->
+<!--            -->
+
+
+<!--</scrip>-->
+{% endblock %}
+
+<!--<script>-->
+<!--    window.onload = function() {-->
+<!--        let addMovieFieldBtn = document.getElementById('add-movie-field');-->
+<!--        addMovieFieldBtn.addEventListener('click', function(e){-->
+<!--            e.preventDefault();-->
+<!--            let allMoviesFieldWrapper = document.getElementById('movies');-->
+<!--            let allMoviesField = allMoviesFieldWrapper.getElementsByTagName('input');-->
+<!--            if(allMoviesField.length > 4) {-->
+<!--                alert('You can  have only five movies name');-->
+<!--                return;-->
+<!--            }-->
+<!--            let movieInputIds = []-->
+<!--            for(let i = 0; i < allMoviesField.length; i++) {-->
+<!--                movieInputIds.push(parseInt(allMoviesField[i].name.split('-')[1]));-->
+<!--            }-->
+<!--            let newFieldName = `movies-${Math.max(...movieInputIds) + 1}`;-->
+<!--            allMoviesFieldWrapper.insertAdjacentHTML('beforeend',`-->
+<!--            <li><label for="${newFieldName}">Movie Name</label> <input id="${newFieldName}" name="${newFieldName}" type="text" value=""></li>-->
+<!--            `);-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->

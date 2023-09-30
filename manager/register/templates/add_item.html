@@ -1,0 +1,20 @@
+{% extends "dashboard.html" %}
+
+{% block styles %}
+
+{% endblock %}
+{% block content %}
+<div>
+    <form action="{{url_for('supply.add_supply')}}" method="POST">
+        {{ form.csrf_token }}
+        {{ form.supplier.label }}
+        {{ form.supplier }}
+        {{ form.name.label }}
+        {{ form.name }}
+        {{ form.qty.label }}
+        {{ form.qty }}
+        {{ form.submit }}
+    </form>
+</div>
+
+{% endblock %}

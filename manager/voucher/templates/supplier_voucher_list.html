@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+{% block content %}
+
+  <form method="POST">
+    <div>
+    {{ form.csrf_token }}
+    {{ form.supplier(**{"hx-get":"/voucher/get_supplier_voucher", "hx-target": "#vouchers", "hx-trigger":"change"}) }}
+    {{ form.vouchers(**{"hx-get":"/voucher/get_supp_vouch_details", "hx-target": "#voucher-table", "hx-trigger":"change"}) }}
+
+    </div>
+    <div id="full-voucher-detail" class="w-full mt-8">
+      <table class="w-full table-auto text-center" id="voucher-table">
+
+      </table>
+      </div>
+  </form>
+
+
+<div>
+
+
+</div>
+{% endblock %}

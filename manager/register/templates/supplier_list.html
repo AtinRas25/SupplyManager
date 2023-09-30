@@ -1,0 +1,9 @@
+{% extends "dashboard.html" %}
+{% from 'bootstrap5/table.html' import render_table %}
+{% block styles %}
+{{ bootstrap.load_css() }}
+{% endblock %}
+{% block content %}
+{{ render_table(list) }}
+
+{% endblock %}
