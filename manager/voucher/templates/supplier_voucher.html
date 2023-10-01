@@ -1,10 +1,28 @@
 {% extends "layout.html" %}
-{% from "bootstrap5/form.html" import render_form %}
+{% from "bootstrap5/form.html" import render_field %}
 {% block styles %}
 
 {{ bootstrap.load_css() }}
 {% endblock %}
 
 {% block content %}
-{{ render_form(form, novalidate = True) }}
+<form method="POST">
+{{ form.csrf_token() }}
+    <div class="mb-12">
+<div class="py-4 mb-2">
+    {{form.date.label(class_='text-lg')}}
+    {{ form.date(class_='form-select rounded-lg mb-2') }}
+    {{form.supplier.label(class_='text-lg')}}
+    {{ form.supplier(class_='form-select rounded-lg') }}
+</div>
+    {% for product in form.product: %}
+    {% for field in product: %}
+    {{ field.label }}
+    {{ field(class_="form-select rounded-lg") }}
+    {% endfor %}
+    <br>
+    {% endfor %}
+    </div>
+    {{ form.submit(class_="bg-green-600 px-8 py-2 rounded-lg text-white hover:bg-green-700") }}
+</form>
 {% endblock %}

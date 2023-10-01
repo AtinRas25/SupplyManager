@@ -11,7 +11,7 @@ import os
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+    app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY', default='dev')
     app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get('DB_URI', 'sqlite:///inventory.db')
     app.config["DATABASE_TRACK_MODIFICATIONS"] = False
 
