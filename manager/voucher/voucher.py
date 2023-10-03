@@ -98,28 +98,36 @@ def supplier_voucher():
     if form.validate_on_submit():
         voucher_date = form.date.data
         supplier_id = form.supplier.data.id
+        supplier_name = form.supplier.data.supplier_name
         voucher = {}
         iterator = 1
+        total_price = 0
         for field in form.product.data:
             product = field['item']
             if product != '':
                 qty = field['item_qty']
+                price = field['item_price']
                 new_item = Supply(
                     name=product,
                     qty=qty,
                     unwashed_qty=qty,
                     supply_date=voucher_date,
-                    supplier_id=supplier_id
+                    supplier_id=supplier_id,
+                    supplier_name=supplier_name,
+                    price=price
                 )
+                total_price += price*qty
                 db.session.add(new_item)
                 db.session.commit()
                 voucher[f"{iterator}"] = field
                 iterator += 1
 
+        voucher["Total Price"] = total_price
         new_voucher = SupplierVoucher(
             voucher_date=voucher_date,
             voucher_details=json.dumps(voucher),
-            supplier_id=supplier_id
+            supplier_id=supplier_id,
+            voucher_total=total_price
         )
         db.session.add(new_voucher)
         db.session.commit()
@@ -146,4 +154,6 @@ def get_supplier_voucher():
 def get_supp_details():
     voucher_id = request.args.get('vouchers', type=int)
     voucher = SupplierVoucher.query.get(voucher_id)
-    return render_template('get_supp_vouch_details.html', voucher=json.loads(voucher.voucher_details))
+    date_voucher = voucher.voucher_date
+    return render_template('get_supp_vouch_details.html', voucher=json.loads(voucher.voucher_details),
+                           date=date_voucher)

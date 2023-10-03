@@ -58,6 +58,7 @@ class VoucherListForm(FlaskForm):
 class ProductForm(Form):
     item = StringField('Products')
     item_qty = IntegerField("Quantity", default=0)
+    item_price = IntegerField("Price", default=0)
 
 
 class SupplierVoucherForm(FlaskForm):

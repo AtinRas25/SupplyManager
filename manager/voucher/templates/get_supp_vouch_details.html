@@ -1,18 +1,39 @@
+<caption class="caption-top py-4 border border-slate-700">
+    <span class="text-lg font-extrabold">
+        Date : {{ date }}
+    </span>
+
+</caption>
 <thead>
-        <tr>
-            <th>S.No</th>
-            <th>Item Name</th>
-            <th>Quantity</th>
+
+        <tr class="h-12">
+            <th class="border border-slate-700">S.No</th>
+            <th class="border border-slate-700">Item Name</th>
+            <th class="border border-slate-700">Quantity</th>
+            <th class="border border-slate-700">Return</th>
+            <th class="border border-slate-700">Price per Pc</th>
         </tr>
         </thead>
         <tbody>
-        {% for key in voucher.keys() %}
-        <tr>
-            <td>{{key}}</td>
-            <td>{{voucher[key]['item']}}</td>
-            <td>{{voucher[key]['item_qty']}}</td>
-<!--            <td><input type="number" id="qty_received" name="qty" value="0" max="{{voucher[key]['item_remaining']}}"></td>-->
+        {% for key in voucher.keys(): %}
+        {% if key != 'Total Price': %}
+        <tr class="h-12">
+            <td class="border border-slate-700">{{key}}</td>
+            <td class="border border-slate-700">{{voucher[key]['item']}}</td>
+            <td class="border border-slate-700">{{voucher[key]['item_qty']}}</td>
+            <td class="border border-slate-700 w-24"><input class="form-select border-none" type="number" id="returned" name="qty" value="0" max="{{voucher[key]['item_qty']}}"></td>
+            <td class="border border-slate-700">₹ {{ voucher[key]['item_price']}}</td>
 
         </tr>
+        {% else : %}
+        <tr class="h-12">
+            <td class="border border-slate-700">{{key}}</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>₹ {{voucher[key]}}</td>
+        </tr>
+        {% endif %}
         {% endfor %}
+
         </tbody>

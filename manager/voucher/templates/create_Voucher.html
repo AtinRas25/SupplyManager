@@ -5,17 +5,25 @@
 {% endblock %}
 {% block content %}
 
-{{ render_form(form) }}
-<!--<div>-->
-<!--    <form method="POST">-->
-<!--        {{ form.csrf_token }}-->
-<!--        {{ form.dhobi.label }}-->
-<!--        {{ form.dhobi() }}-->
-<!--        {{ form.product() }}-->
-<!--        <button id="add-entry-button">Add more</button>-->
-<!--        {{ form.submit }}-->
-<!--    </form>-->
-<!--</div>-->
+<form method="POST">
+{{ form.csrf_token() }}
+    <div class="mb-12">
+<div class="py-4 mb-2">
+    {{form.date.label(class_='text-lg')}}
+    {{ form.date(class_='form-select rounded-lg mb-2') }}
+    {{form.dhobi.label(class_='text-lg')}}
+    {{ form.dhobi(class_='form-select rounded-lg') }}
+</div>
+    {% for product in form.product: %}
+    {% for field in product: %}
+    {{ field.label }}
+    {{ field(class_="form-input rounded-lg mb-4") }}
+    {% endfor %}
+    <br>
+    {% endfor %}
+    </div>
+    {{ form.submit(class_="bg-green-600 px-8 py-2 rounded-lg text-white hover:bg-green-700") }}
+</form>
 
 {% endblock %}
 

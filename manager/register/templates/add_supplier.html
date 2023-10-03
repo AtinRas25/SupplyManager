@@ -5,11 +5,13 @@
 <div>
     <form action="{{url_for('supplier.add_supplier')}}" method="POST">
         {{ form.csrf_token }}
-        {{ form.supplier_name.label }}
-        {{ form.supplier_name }}
-        {{ form.supplier_mobile.label }}
-        {{ form.supplier_mobile }}
-        {{ form.submit }}
+        <div class="flex flex-col gap-4">
+        {{ form.supplier_name.label(class_='text-lg mr-2') }}
+        {{ form.supplier_name(class_='form-input rounded-lg') }}
+        {{ form.supplier_mobile.label(class_='text-lg mr-2') }}
+        {{ form.supplier_mobile(class_='form-input rounded-lg') }}
+        {{ form.submit(class_='bg-green-600 px-4 py-2 rounded-lg hover:bg-green-700 text-gray-100') }}
+        </div>
     </form>
 </div>
 

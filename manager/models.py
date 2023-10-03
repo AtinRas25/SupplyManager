@@ -18,11 +18,13 @@ class Supply(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     qty = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Integer, nullable=False)
     supply_date = db.Column(db.Date, nullable=False)
     unwashed_qty = db.Column(db.Integer, nullable=False)
     washing_qty = db.Column(db.Integer, default=0)
     received_qty = db.Column(db.Integer, default=0)
     supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'))
+    supplier_name = db.Column(db.String(100), nullable=False)
     dhobi_list = db.relationship('Dhobi', secondary=dhobi_association, backref='items')
 
     def __repr__(self):
@@ -55,6 +57,7 @@ class SupplierVoucher(db.Model):
     voucher_date = db.Column(db.Date, nullable=False)
     voucher_details = db.Column(db.JSON, default='{}')
     supplier_id = db.Column(db.Integer, db.ForeignKey('suppliers.id'))
+    voucher_total = db.Column(db.Integer, nullable=False)
 
     def __repr__(self):
-        return f"Voucher {self.id}"
+        return f"Voucher {self.id} -- {self.voucher_date}"
