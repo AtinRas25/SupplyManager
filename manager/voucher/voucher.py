@@ -3,7 +3,9 @@ from manager.forms import Dhobi_Voucher, VoucherListForm, SupplierVoucherForm, S
 from manager.extensions import *
 from manager.models import DhobiVoucher, Dhobi, Suppliers, Supply, SupplierVoucher
 from datetime import date
+from sqlalchemy import desc
 import json
+
 vouchers_bp = Blueprint("voucher", __name__, url_prefix='/voucher', template_folder='templates')
 
 
@@ -24,7 +26,8 @@ def createVoucher():
                 product.washing_qty += qty
                 supplier = Suppliers.query.get_or_404(product.supplier_id)
 
-                voucher[f'{iterator}'] = {'item_id': product.id, 'item_name': product.name, 'item_supplier': supplier.supplier_name,
+                voucher[f'{iterator}'] = {'item_id': product.id, 'item_name': product.name,
+                                          'item_supplier': supplier.supplier_name,
                                           'item_qty': qty, 'item_received': 0, 'item_remaining': qty}
                 iterator += 1
                 total_qty += qty
@@ -116,7 +119,7 @@ def supplier_voucher():
                     supplier_name=supplier_name,
                     price=price
                 )
-                total_price += price*qty
+                total_price += price * qty
                 db.session.add(new_item)
                 db.session.commit()
                 voucher[f"{iterator}"] = field
@@ -157,3 +160,17 @@ def get_supp_details():
     date_voucher = voucher.voucher_date
     return render_template('get_supp_vouch_details.html', voucher=json.loads(voucher.voucher_details),
                            date=date_voucher)
+
+
+# route to view all vouchers for a supplier
+@vouchers_bp.route('/all_voucher_supplier')
+def all_voucher_supplier():
+    form = SupplierVoucherList()
+    return render_template('all_voucher_supplier.html', form=form)
+
+
+@vouchers_bp.route('/get-all-voucher')
+def get_all_voucher():
+    supplier_id = request.args.get('supplier', type=int)
+    vouchers = SupplierVoucher.query.filter_by(supplier_id=supplier_id).order_by(SupplierVoucher.id.desc()).all()
+    return render_template('get-all-voucher-supplier.html', vouchers=vouchers)

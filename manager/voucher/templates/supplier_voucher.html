@@ -2,6 +2,7 @@
 
 
 {% block content %}
+<div class="px-4">
 <form method="POST">
 {{ form.csrf_token() }}
     <div class="mb-12">
@@ -24,4 +25,5 @@
     </div>
     {{ form.submit(class_="bg-green-600 px-8 py-2 rounded-lg text-white hover:bg-green-700") }}
 </form>
+    </div>
 {% endblock %}

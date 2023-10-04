@@ -1,0 +1,16 @@
+<thead>
+  <tr>
+      <td class="border border-slate-700">Date</td>
+      <td class="border border-slate-700">Voucher Number</td>
+      <td class="border border-slate-700">Voucher Total</td>
+  </tr>
+</thead>
+<tbody>
+{% for voucher in vouchers: %}
+  <tr>
+    <td class="border border-slate-700">{{voucher.voucher_date}}</td>
+    <td class="border border-slate-700">Voucher {{voucher.id}}</td>
+    <td class="border border-slate-700">₹ {{voucher.voucher_total}}</td>
+  </tr>
+{% endfor %}
+</tbody>
